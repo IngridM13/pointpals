@@ -47,7 +47,7 @@
   function confetti() {
     var cv = $("#confetti"), cx = cv.getContext("2d");
     cv.width = innerWidth; cv.height = innerHeight;
-    var colors = ["#7c4dff", "#ff5fa2", "#ffd93d", "#22c55e", "#38bdf8"];
+    var colors = ["#2f6bff", "#22b8f0", "#ffd93d", "#22c55e", "#7aa7ff"];
     for (var i = 0; i < 160; i++) parts.push({ x: innerWidth / 2, y: innerHeight * 0.45, vx: (Math.random() - 0.5) * 16, vy: -Math.random() * 15 - 3, s: 5 + Math.random() * 7, c: colors[i % colors.length], r: Math.random() * 6, life: 140 });
     if (raf) return;
     (function step() {
