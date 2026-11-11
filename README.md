@@ -18,16 +18,14 @@ Add `?local=1` to the URL to test with two tabs of the same browser (no network 
 2. Repo → Settings → Pages → Source: **GitHub Actions**. The included workflow deploys on every push.
 3. Your site: `https://<user>.github.io/<repo>/`
 
-## Make money with Google AdSense
-1. **Buy a custom domain** (~$10/yr) and add it in Settings → Pages. AdSense generally
-   will not approve `*.github.io` subdomains.
-2. Apply at <https://adsense.google.com>, add your domain, wait for approval.
-3. Fill in `client` and the two slot ids in `ads.js`, and your id in `ads.txt`.
-4. Add your contact email to `privacy.html`.
-5. For EU/UK visitors, Google requires a certified consent tool: enable Google's free
-   **Privacy & messaging** (Funding Choices) in AdSense. The simple banner in `ads.js` is a stopgap.
+## Ads
+Ads are removed from `main`. The AdSense version (ad slots, consent banner, `ads.js`, `ads.txt`)
+is saved under the git tag `with-ads`: `git checkout with-ads`, or cherry-pick from it when you
+host on your own domain (AdSense needs one, `*.github.io` is generally rejected).
 
-Ad placement is deliberately a top banner + sidebar box, never over the cards (accidental clicks violate AdSense policy).
+## Hosting elsewhere
+It's plain static files, so any static host works: Cloudflare Pages (recommended), Netlify, Vercel.
+Connect the repo, leave the build command empty, set the output directory to `/`.
 
 ## Limits to know
 - The host's tab is the room: if the host closes it, the room ends.
