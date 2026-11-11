@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PointPals — Planning Poker that's actually fun</title>
+<meta name="description" content="Free planning poker for agile teams. No signup, no server: create a room, share the link, and estimate with your pals.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🃏</text></svg>">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<canvas id="confetti"></canvas>
+
+<header class="top">
+  <a class="logo" href="./">🃏 Point<span>Pals</span></a>
+  <div class="top-right">
+    <button id="roomChip" class="chip hidden" title="Copy invite link">Room <b id="roomCode"></b> · copy link 🔗</button>
+    <button id="soundBtn" class="chip" title="Toggle sound">🔊</button>
+  </div>
+</header>
+
+<div class="ad ad-top" id="adTop"></div>
+
+<main>
+  <!-- LOBBY -->
+  <section id="lobby" class="panel lobby">
+    <h1>Estimate together.<br><span class="grad">Argue less.</span></h1>
+    <p class="sub">Free planning poker. No signup, no install. Make a room, send the link, flip the cards.</p>
+
+    <label class="field">Your name
+      <input id="nameInput" maxlength="18" placeholder="e.g. Ingrid" autocomplete="off">
+    </label>
+    <div class="field">Pick your buddy
+      <div id="avatars" class="avatars"></div>
+    </div>
+
+    <div class="lobby-actions">
+      <button id="createBtn" class="btn big">✨ Create a room</button>
+      <div class="or">or join one</div>
+      <div class="join-row">
+        <input id="codeInput" maxlength="4" placeholder="CODE" autocomplete="off">
+        <button id="joinBtn" class="btn ghost">Join</button>
+      </div>
+    </div>
+    <p id="lobbyMsg" class="msg"></p>
+    <p class="fine">Peer-to-peer: your votes go straight between browsers. Nothing is stored on a server.</p>
+  </section>
+
+  <!-- ROOM -->
+  <section id="room" class="room hidden">
+    <div class="table-col">
+      <div class="panel">
+        <div class="story-row">
+          <input id="storyInput" maxlength="120" placeholder="What are we estimating? (e.g. PAY-42 Checkout redesign)">
+          <select id="deckSelect" title="Deck"></select>
+        </div>
+
+        <div id="seats" class="seats"></div>
+
+        <div id="result" class="result hidden"></div>
+
+        <div class="controls">
+          <button id="revealBtn" class="btn big">👀 Reveal cards</button>
+          <button id="resetBtn" class="btn ghost">🔄 New round</button>
+          <div class="timer-box">
+            <button id="timerBtn" class="btn ghost small">⏱ 30s</button>
+            <span id="timerOut" class="timer"></span>
+          </div>
+        </div>
+
+        <div class="throw">
+          Throw at a pal:
+          <span id="throwBar"></span>
+          <small>(pick one, then click a seat)</small>
+        </div>
+      </div>
+
+      <div id="hand" class="hand" aria-label="Your cards"></div>
+    </div>
+
+    <aside class="side">
+      <div class="ad ad-side" id="adSide"></div>
+      <div class="panel">
+        <h3>Round history</h3>
+        <ol id="history" class="history"><li class="empty">Nothing yet. Reveal a round!</li></ol>
+        <button id="copyHist" class="btn ghost small">📋 Copy as text</button>
+      </div>
+      <div class="panel invite">
+        <h3>Invite the team</h3>
+        <input id="inviteLink" readonly>
+        <p id="netNote" class="fine"></p>
+      </div>
+    </aside>
+  </section>
+</main>
+
+<footer>
+  <span>Made with ♥ for agile teams.</span>
+  <a href="privacy.html">Privacy &amp; ads</a>
+</footer>
+
+<div id="consent" class="consent hidden">
+  <p>We show ads to keep PointPals free. OK to use cookies for personalised ads?</p>
+  <button id="consentYes" class="btn small">Accept</button>
+  <button id="consentNo" class="btn ghost small">Non-personalised only</button>
+</div>
+<div id="toast" class="toast"></div>
+
+<script src="https://unpkg.com/peerjs@1.5.4/dist/peerjs.min.js" onerror="window.__noPeer=1"></script>
+<script src="ads.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
